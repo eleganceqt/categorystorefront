@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="/wa-apps/shop/plugins/categorystorefront/assets/semantic-ui/semantic.css?v={$wa->version()}">
+
+<style>
+    .bottom-placeholder {
+        min-height: 20vh;
+    }
+</style>
+
+<div class="ui reset" id="categorystorefront-settings-wrapper">
+    <div class="ui grid">
+
+        <div class="row">
+            <div class="sixteen wide column">
+                <div class="ui small center aligned header">Настройки</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="sixteen wide column">
+                <table class="ui selectable celled table">
+                    <thead>
+                        <tr>
+                            <th class="center aligned eight wide">Категория</th>
+                            <th class="center aligned eight wide">Витрина</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-category-id="others">
+                            <td>
+                                <div class="ui tiny header">
+                                    <i class="ui grey users icon"></i>
+                                    Остальные
+                                </div>
+                            </td>
+                            <td class="center aligned">
+                                {$hasValidValue = isset($settings['associations']['others']) && in_array($settings['associations']['others'], $storefronts, true)}
+                                <div class="ui fluid selection dropdown storefront-dropdown">
+                                    <input type="hidden" name="storefront[others]" {if $hasValidValue}value="{$settings['associations']['others']|escape}"{/if}>
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text">Выберите витрину</div>
+                                    <div class="menu">
+                                        {foreach $storefronts as $storefront}
+                                            <div class="item" data-value="{$storefront|escape}">{$storefront|escape}</div>
+                                        {/foreach}
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {foreach $categories as $category}
+                            <tr data-category-id="{$category.id}">
+                                <td>
+                                    <div class="ui tiny header">
+                                        <i class="ui black users icon"></i>
+                                        {$category.name|escape}
+                                    </div>
+                                </td>
+                                <td class="center aligned">
+                                    {$hasValidValue = isset($settings['associations'][$category.id]) && in_array($settings['associations'][$category.id], $storefronts, true)}
+                                    <div class="ui fluid selection dropdown storefront-dropdown">
+                                        <input type="hidden" name="storefront[{$category.id}]" {if $hasValidValue}value="{$settings['associations'][$category.id]|escape}"{/if}>
+                                        <i class="dropdown icon"></i>
+                                        <div class="default text">Выберите витрину</div>
+                                        <div class="menu">
+                                            {foreach $storefronts as $storefront}
+                                                <div class="item" data-value="{$storefront|escape}">{$storefront|escape}</div>
+                                            {/foreach}
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        {/foreach}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2">
+                                <div class="ui basic center aligned sgement">
+                                    <div class="ui primary bttn submit-bttn">Сохранить</div>
+                                </div>
+                            </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="sixteen wide column">
+                <div class="ui basic segment bottom-placeholder"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="/wa-apps/shop/plugins/categorystorefront/assets/semantic-ui/semantic.min.js"></script>
+<script src="/wa-apps/shop/plugins/categorystorefront/js/settings.js?v={$wa->version()}"></script>

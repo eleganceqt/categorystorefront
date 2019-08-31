@@ -189,7 +189,7 @@ class shopCategorystorefrontPlugin extends shopPlugin
             $currentStorefront  = $this->currentStorefront();
             $categoryStorefront = $settings['associations'][$categoryId];
 
-            wa_dumpc($currentStorefront, $categoryStorefront);
+//            wa_dumpc($currentStorefront, $categoryStorefront);
 
             if ($currentStorefront !== $categoryStorefront) {
                 $this->redirectUnlessNull($this->obtainStorefrontUrl($categoryStorefront));
